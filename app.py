@@ -9,7 +9,7 @@ import streamlit as st
 # הגדרות כלליות
 # -----------------------------
 st.set_page_config(
-    page_title="Optics Lab Designer | Lens Simulator",
+    page_title="Optics Lab Designer",
     page_icon="🔬",
     layout="wide",
 )
@@ -33,6 +33,17 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+# -----------------------------
+# בחירת ניסוי
+# -----------------------------
+EXPERIMENTS = ["דמות בעדשות", "התאבכות ועקיפה"]
+experiment = st.radio("בחרי ניסוי", EXPERIMENTS, horizontal=True, key="experiment")
+
+if experiment == "התאבכות ועקיפה":
+    from interference import render_interference
+    render_interference()
+    st.stop()
 
 LENSES = pd.DataFrame(
     [
